@@ -7,24 +7,24 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 autentificador = Blueprint('autentificador', __name__)
 
-@autentificador.route('login', methods=['GET','POST'])
+@autentificador.route('/login', methods=['GET','POST'])
 def login():
     if request.method == 'POST':
-        nome_usuario = request.form.get('nome_usuario')
-        senha = request.form.get('senha')
+        email = request.form.get('email')
+        senha = request.form.get('password')
 
-        usuario = Usuario.query.filter_by(nome_usuario=nome_usuario).first()
+        usuario = Usuario.query.filter_by(email=email).first()
 
         if usuario:
             if check_password_hash(usuario.senha, senha):
                 login_user(usuario, remember=True)
-                return redirect(url_for('controllers'))
+                return redirect(url_for('controllers.index'))
             else:
                 return 'senha incorreta'
         else:
             return 'usuario inexistente'
         
-        return render_template("login.html", usuario=current_user)
+    return render_template("login.html", usuario=current_user)
 
 @autentificador.route('/logout')
 @login_required
@@ -34,4 +34,19 @@ def logout():
 
 @autentificador.route('/cadastro', methods = ['GET','POST'])
 def cadastro():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password1 = request.form.get('password')
+        password2 = reques.form.get('confirmPassword')
+
+        usuario = Usuario.query.filter_by(email=email).first()
+        if user:
+            return 'email já existente'
+        else:
+            novo_usuario = Usuario(email=email, admin=False, senha=password1)
+            db.session.add(novo_usuario)
+            db.session.commit()
+            login_user(novo_usuario, remember=True)
+            return redirect(url_for('controllers.index'))
+
     return render_template('cadastro.html', usuario=current_user)
