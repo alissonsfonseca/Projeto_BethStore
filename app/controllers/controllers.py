@@ -7,13 +7,3 @@ controllers = Blueprint('controllers', __name__)
 @controllers.route('/')
 def index():
     return render_template('index.html')
-
-
-@controllers.route('/login')
-def login():
-    return render_template('login.html')
-
-
-@controllers.route('/cadastro')
-def cadastro():
-    return render_template('cadastro.html')
