@@ -8,19 +8,13 @@ database_file = "sqlite:///{}".format(os.path.join(project_dir, "data/database.d
 app.config["SQLALCHEMY_DATABASE_URI"] = database_file
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
+
+from app.controllers.controllers import controllers
+from app.controllers.autentificador import autentificador
+
+app.register_blueprint(controllers, url_prefix='/')
+app.register_blueprint(autentificador, url_prefix='/')
+
 from app.models import tables
 db.create_all()
 
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-
-@app.route('/login')
-def login():
-    return render_template('login.html')
-
-
-@app.route('/cadastro')
-def cadastro():
-    return render_template('cadastro.html')
