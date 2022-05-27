@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 import os
 
@@ -10,3 +10,17 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 from app.models import tables
 db.create_all()
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+
+@app.route('/cadastro')
+def cadastro():
+    return render_template('cadastro.html')
