@@ -37,10 +37,9 @@ def cadastro():
     if request.method == 'POST':
         email = request.form.get('email')
         password1 = request.form.get('password')
-        password2 = reques.form.get('confirmPassword')
 
         usuario = Usuario.query.filter_by(email=email).first()
-        if user:
+        if usuario:
             return 'email já existente'
         else:
             novo_usuario = Usuario(email=email, admin=False, senha=password1)
