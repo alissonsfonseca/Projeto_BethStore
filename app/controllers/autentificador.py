@@ -31,3 +31,7 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('autentificador.login'))
+
+@autentificador.route('/cadastro', methods = ['GET','POST'])
+def cadastro():
+    return render_template('cadastro.html', usuario=current_user)
