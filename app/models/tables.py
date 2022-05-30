@@ -1,8 +1,10 @@
 from app import db
 from flask_login import UserMixin
+from sqlalchemy.sql import func
+from re import U
 
 class Usuario(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    id = db.Column(db.Integer, primary_key = True)
     admin = db.Column(db.Boolean, default = False)
     senha = db.Column(db.String)
     email = db.Column(db.String)
