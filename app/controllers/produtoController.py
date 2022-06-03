@@ -20,7 +20,7 @@ def cadastroProduto():
             categoria = request.form.get('categoria')
 
             novo_produto = Produto(imagem=image, marca=marca, modelo=modelo,preco=preco, tamanho=tamanho,
-            tamanho=tamanho, quantidade=quantidade,id_categoria=categoria)
+             quantidade=quantidade,id_categoria=categoria)
             db.session.add(novo_produto)
             db.session.commit()
         return render_template('cadastroProduto.html', usuario = current_user, categorias = categorias)
