@@ -49,7 +49,7 @@ def cadastro():
         elif len(password1) < 4:
             return 'senha curta'
         else:
-            novo_usuario = Usuario(email=email, admin=False, senha=password1)
+            novo_usuario = Usuario(email=email, admin=False, senha=generate_password_hash(password1, method='sha256'))
             db.session.add(novo_usuario)
             db.session.commit()
             login_user(novo_usuario, remember=True)
