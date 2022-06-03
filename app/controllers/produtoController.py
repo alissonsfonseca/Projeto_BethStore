@@ -5,22 +5,21 @@ from app.models.tables import Produto, Categoria
 
 produtoController = Blueprint('produtoController', __name__)
 
-@produtoController.route('/produto/cadastro')
+@produtoController.route('/produto/cadastro', methods=["GET", "POST"])
 @login_required
 def cadastroProduto():
     if current_user.admin == True:
         categorias = Categoria.query.all()
         if request.method == 'POST':
-            image = request.form.get('image')
+            #image = request.form.get('image')
             marca = request.form.get('marca')
             modelo = request.form.get('modelo')
-            preco = request.form.get('preco')
+            preco = float(request.form.get('preco'))
             tamanho = request.form.get('tamanho')
-            quantidade = request.form.get('quantidade')
-            categoria = request.form.get('categoria')
+            quantidade = int(request.form.get('quantidade'))
+            categoria = int(request.form.get('categoria'))
 
-            novo_produto = Produto(imagem=image, marca=marca, modelo=modelo,preco=preco, tamanho=tamanho,
-             quantidade=quantidade,id_categoria=categoria)
+            novo_produto = Produto(id_categoria=categoria, marca=marca, modelo=modelo,preco=preco, tamanho=tamanho, quantidade=quantidade)
             db.session.add(novo_produto)
             db.session.commit()
         return render_template('cadastroProduto.html', usuario = current_user, categorias = categorias)
