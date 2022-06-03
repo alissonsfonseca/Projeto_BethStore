@@ -9,6 +9,6 @@ produtoController = Blueprint('produtoController', __name__)
 @login_required
 def cadastroProduto():
     if current_user.admin == True:
-        return render_template('cadastroProduto.html')
+        return render_template('cadastroProduto.html', usuario = current_user)
     else:
         return "Acesso apenas para admin"

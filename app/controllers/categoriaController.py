@@ -17,7 +17,7 @@ def cadastroCategoria():
                         categoria_nova = Categoria(nome=nome, setor=setor, descricao=descricao)
                         db.session.add(categoria_nova)
                         db.session.commit()
-                return render_template('cadastroCategoria.html')
+                return render_template('cadastroCategoria.html', usuario = current_user)
         else:
                 return 'Acesso exclusivo de administrador'
 
