@@ -35,6 +35,7 @@ class Produto(db.Model):
 class Categoria(db.Model):
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     descricao = db.Column(db.String)
+    nome = db.Column(db.String)
     setor = db.Column(db.String)
 
 class Carrinho(db.Model):
