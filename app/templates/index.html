@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div style="padding-bottom: 30px; display: flex; padding-left: 30px;">
+  <div class="row">
 {% for data in produtos %}
-<div class="card" style="width: 18rem;">
+<div class="card" style="width: 18rem; margin-right: 30px;">
   <img src={{data.imagem}} class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">Modelo: {{data.modelo}}</h5>
@@ -13,6 +15,10 @@
   </div>
 </div>
 {% endfor%}
+</div>
+</div>
+
+
 <div style="padding-bottom: 30px; display: flex; padding-left: 30px;">
     <div class="card" style="width: 18rem; margin-right: 30px;">
         <img src="../static/img/tecladoama" class="card-img-top" alt="...">

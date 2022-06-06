@@ -41,6 +41,9 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     {% if usuario.is_authenticated %}
                     <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/#">Carrinho</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/logout">Logout</a>
                     </li>
                     {% else %}
