@@ -25,3 +25,8 @@ def cadastroProduto():
         return render_template('cadastroProduto.html', usuario = current_user, categorias = categorias)
     else:
         return "Acesso apenas para admin"
+
+@produtoController.route('/produtos/<int:id>', methods=['GET','POST'])
+def paginaProduto(id):
+    produto = Produto.query.get_or_404(id)
+    return render_template('produto.html', usuario=current_user, produto=produto)
