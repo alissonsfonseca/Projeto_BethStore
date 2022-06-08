@@ -26,8 +26,10 @@ def cadastroProduto():
             tamanho = request.form.get('tamanho')
             quantidade = int(request.form.get('quantidade'))
             categoria = int(request.form.get('categoria'))
+            descricao = request.form.get('descricao')
+            inf_tecnica = request.form.get('inf_tecnnica')
 
-            novo_produto = Produto(id_categoria=categoria, marca=marca, modelo=modelo,preco=preco, tamanho=tamanho, quantidade=quantidade, id_imagem=imagem.id)
+            novo_produto = Produto(descricao=descricao, inf_tecnica=inf_tecnica, id_categoria=categoria, marca=marca, modelo=modelo,preco=preco, tamanho=tamanho, quantidade=quantidade, id_imagem=imagem.id)
             db.session.add(novo_produto)
             db.session.commit()
             
