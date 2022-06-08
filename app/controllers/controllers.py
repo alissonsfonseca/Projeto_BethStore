@@ -8,7 +8,6 @@ controllers = Blueprint('controllers', __name__)
 @controllers.route('/')
 def index():
     produtos = Produto.query.all()
-    imagems = Imagem.query.filter
     categorias = Categoria.query.all()
 
     return render_template('index.html', usuario=current_user, produtos=produtos, categorias=categorias)
