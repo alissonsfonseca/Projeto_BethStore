@@ -2,10 +2,10 @@
 
 {% block content %}
 
-<div class="container">
-  <div class="card">
-    <div class="card-header">
-      {{produto.modelo}}
+<div class="container-fluid">
+  <div class="card mb-3">
+    <div class="embed-responsive embed-responsive-4by3">
+      <img src="{{ url_for('produtoController.get_imagem', id=produto.id_imagem) }}" class="card-img-top" alt="...">
     </div>
     <div class="card-body">
       <h5 class="card-title">{{produto.modelo}}</h5>
