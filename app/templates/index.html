@@ -5,13 +5,13 @@
   <div class="row">
 {% for data in produtos %}
 <div class="card" style="width: 18rem; margin-right: 30px;">
-  <img src = "/produtos/imagem/{{data.id_imagem}}" class="card-img-top" alt="...">
+  <img src = "{{ url_for('produtoController.get_imagem', id=data.id_imagem) }}" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">Modelo: {{data.modelo}}</h5>
     <p class="card-text">Marca:{{data.marca}}</p>
     <p class="card-text">Tamanho: {{data.tamanho}}</p>
     <h4>R$ {{data.preco}}</h4>
-    <a href="/produtos/{{data.id}}" class="btn btn-primary">Adicionar ao carrinho</a>
+    <a href="{{ url_for('produtoController.paginaProduto', id=data.id) }}" class="btn btn-primary">Adicionar ao carrinho</a>
   </div>
 </div>
 {% endfor%}
