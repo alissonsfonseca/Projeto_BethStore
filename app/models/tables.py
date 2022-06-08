@@ -33,6 +33,8 @@ class Produto(db.Model):
     preco = db.Column(db.Float)
     tamanho = db.Column(db.String)
     quantidade = db.Column(db.Integer)
+    inf_tecnica = db.Column(db.String)
+    descricao = db.Column(db.String)
     
     id_imagem = db.Column(db.Integer, db.ForeignKey("imagem.id"))
     imagem = db.relationship("Imagem", foreign_keys = id_imagem)
