@@ -1,6 +1,6 @@
 from flask import Blueprint , render_template, redirect, url_for, request
 from flask_login import login_required, current_user
-from app.models.tables import Usuario, Produto, Categoria
+from app.models.tables import Imagem, Usuario, Produto, Categoria
 from app import db
 
 controllers = Blueprint('controllers', __name__)
@@ -8,6 +8,7 @@ controllers = Blueprint('controllers', __name__)
 @controllers.route('/')
 def index():
     produtos = Produto.query.all()
+    imagems = Imagem.query.filter
     categorias = Categoria.query.all()
 
     return render_template('index.html', usuario=current_user, produtos=produtos, categorias=categorias)

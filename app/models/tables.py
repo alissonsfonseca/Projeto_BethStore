@@ -3,6 +3,12 @@ from flask_login import UserMixin
 from sqlalchemy.sql import func
 from re import U
 
+class Imagem(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    img = db.Column(db.String)
+    name = db.Column(db.String)
+    mimetype = db.Column(db.String)
+
 class Usuario(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key = True)
     admin = db.Column(db.Boolean, default = False)
@@ -27,7 +33,9 @@ class Produto(db.Model):
     preco = db.Column(db.Float)
     tamanho = db.Column(db.String)
     quantidade = db.Column(db.Integer)
-    imagem = db.Column(db.LargeBinary)
+    
+    id_imagem = db.Column(db.Integer, db.ForeignKey("imagem.id"))
+    imagem = db.relationship("Imagem", foreign_keys = id_imagem)
 
     id_categoria = db.Column(db.Integer, db.ForeignKey("categoria.id"))
     categoria = db.relationship("Categoria", foreign_keys = id_categoria)
