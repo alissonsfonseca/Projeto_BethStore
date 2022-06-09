@@ -11,7 +11,7 @@
     <div class="row">
   {% for data in produtos %}
   <div class="card" style="width: 18rem; margin-right: 30px;">
-    <img src={{data.imagem}} class="card-img-top" alt="...">
+    <img src = "{{ url_for('produtoController.get_imagem', id=data.id_imagem) }}" class="card-img-top" style="width: 160px; margin-top: 10px;">
     <div class="card-body">
       <h5 class="card-title">Modelo: {{data.modelo}}</h5>
       <p class="card-text">Marca:{{data.marca}}</p>

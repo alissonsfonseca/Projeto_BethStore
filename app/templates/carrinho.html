@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Produto</th>
+        <th scope="col">Cliente</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for items in carrinho %}
+      <tr>
+        <th >{{items.produto.modelo}}</th>
+        <td>{{items.cliente.nome}}</td>
+      </tr>
+      {% endfor%}
+    </tbody>
+  </table>
+
+
+{% endblock content %}
