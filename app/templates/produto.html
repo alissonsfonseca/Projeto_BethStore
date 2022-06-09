@@ -4,33 +4,68 @@
 
 <div class="container">
   <div class="card">
-    <div class="card-header">
-      {{produto.modelo}}
-    </div>
-    <div class="card-body">
-      <p class="card-text">Código do Produto: {{produto.id}}</p>
-      <img src = "{{ url_for('produtoController.get_imagem', id=produto.id_imagem) }}" style="width: 300px;">
-      <p class="card-text">Preço: {{produto.preco}}</p>
-      <p class="card-text">Marca: {{produto.marca}}</p>
-      <p class="card-text">Tamanho: {{produto.tamanho}}</p>
-      <p class="card-text">Descrição: {{produto.descricao}}</p>
-      <p class="card-text">Informações Técnicas: {{produto.inf_tecnica}}</p>
-      <form method="POST">
-        <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
-          <label class="form-label" for="quantidade">Quantidade</label>
-          <input type="number"
-                  required
-                  class="form-control"
-                  name="quantidade" 
-                  id="quantidade" 
-                  placeholder="10">
+    <div class="card">
+      <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <div class="card-body">
+              <div style="width: 100px;">
+                <div class="mb-3"><img src="{{ url_for('produtoController.get_imagem', id=produto.id_imagem) }}" style="width: 50px;"></div>
+                <div class="mb-3"><img src="{{ url_for('produtoController.get_imagem', id=produto.id_imagem) }}" style="width: 50px;"></div>
+                <div><img src="{{ url_for('produtoController.get_imagem', id=produto.id_imagem) }}" style="width: 50px;"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 m-20" style="margin-left: -200px;">
+            <img src = "{{ url_for('produtoController.get_imagem', id=produto.id_imagem) }}" style="width: 90%;">
+          </div>
+          <div class="col-md-4">
+            <div class="card-body">
+              <div class="card-header">
+                {{produto.modelo}}
+              </div>
+              <h2>R$ {{produto.preco}}</h2>
+              <p>em <strong><span class="text-success">até 12x sem juros no cartão</span></strong></p>
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Calcular frete
+              </button>
+              <p class="text-primary">O frete fica em R$ 45,00</p>
+  
+              <!-- Modal -->
+              <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form class="row g-3">
+                        <div class="col-auto">
+                          <label for="inputPassword2" class="visually-hidden">CEP</label>
+                          <input type="text" class="form-control" id="cep" placeholder="49480000">
+                        </div>
+                        <div class="col-auto">
+                          <button type="submit" class="btn btn-primary mb-3">Calcular</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <p class="card-text">Tamanho: <strong>{{produto.tamanho}}</strong></p>
+              <p class="card-text">Marca: {{produto.marca}}</p>
+              <p><strong>Descrição</strong></p>
+              <p class="card-text">{{produto.descricao}}</p>
+              <p class="card-text"><small class="text-muted">{{produto.inf_tecnica}}</small></p>
+            <div class="mt-4">
+              <a href="{{ url_for('carrinhoController.produtoCarrinho', id=produto.id)}}">
+                <button type="button" class="btn btn-success">Adicionar ao Carrinho</button>
+              </a>
+            </div>
+          </div>
         </div>
-      
-     
-      <br>
-      <a href="{{ url_for('carrinhoController.produtoCarrinho', id=produto.id)}}" class="btn btn-primary" type="submit">Adicionar ao carrinho</a>
-    </form>
-    </div>
-  </div>
-</div>
+      </div>
 {% endblock content %}

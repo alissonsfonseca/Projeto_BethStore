@@ -2,23 +2,55 @@
 
 {% block content %}
 
+<div class="card text-center " style="margin-left: 20px; margin-right: 20px">
+  <div class="card-header">
+    Carrinho
+  </div>
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Produto</th>
+          <th scope="col">Cliente</th>
+          <th scope="col">R$</th>
+          <th scope="col">Quantidade</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for items in carrinho %}
+        <tr>
+          <th >{{items.produto.modelo}}</th>
+          <td>{{items.cliente.nome}}</td>
+          <th>{{items.produto.preco}}</th>
+          <th>
+            <form  method="POST">
+              <div>
+                <input type="number"
+                        required
+                        name="{{items.produto.id}}" 
+                        id="quantidade" 
+                        placeholder="quantidade">
+            </div>
+            </form>
+          </th>
+        </tr>
+        {% endfor%}
+      </tbody>
+    </table>
+  <div class="card-footer ">
+    Quantidade total de itens:
+    <div>
+      Frete: <strong>R$ 45,00</strong>
+    </div>
+    <div>
+      Valor total: <strong>R$ 100,00</strong>
+    </div>
+    <form action="" method="post">
+      <button type="submit" class="btn btn-success">Finalizar Pedido</button>
+    </form>
+  </div>
+</div>
 
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Produto</th>
-        <th scope="col">Cliente</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for items in carrinho %}
-      <tr>
-        <th >{{items.produto.modelo}}</th>
-        <td>{{items.cliente.nome}}</td>
-      </tr>
-      {% endfor%}
-    </tbody>
-  </table>
 
 
 {% endblock content %}
