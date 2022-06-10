@@ -2,44 +2,6 @@
 
 {% block content %}
 
-<div class="card text-center " style="margin-left: 20px; margin-right: 20px">
-  <div class="card-header">
-    Carrinho
-  </div>
-  <div class="card-body">
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Produto</th>
-          <th scope="col">Cliente</th>
-          <th scope="col">R$</th>
-          <th scope="col">Quantidade</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for items in produto_pedido %}
-        <tr>
-          <th >{{items.nome}}</th>
-          <td>{{items.pedido.cliente.nome}}</td>
-          <th>{{items.produto.preco}}</th>
-          <th>
-            {{items.quantidade}}
-          </th>
-        </tr>
-        {% endfor%}
-      </tbody>
-    </table>
-  <div class="card-footer ">
-    CEP: <strong>{{cliente.cep}}</strong>
-    <div>
-      Frete: <strong>10</strong>
-    </div>
-    <div>
-      Valor total: <strong>{{total}}</strong>
-    </div>
-  </div>
-</div>
-
-
+<h1>Pedidos</h1>
 
 {% endblock content %}

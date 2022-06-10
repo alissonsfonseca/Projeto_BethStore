@@ -90,9 +90,9 @@ class ProdutoPedido(db.Model):
     quantidade = db.Column(db.Integer)
     valor = db.Column(db.Float)
     
-    id_pedido = db.Column(db.Integer, db.ForeignKey("pedido.id"), primary_key = True)
+    id_pedido = db.Column(db.Integer, db.ForeignKey("pedido.id"))
     pedido = db.relationship("Pedido", foreign_keys = id_pedido)
-    id_produto = db.Column(db.Integer, db.ForeignKey("produto.id"), primary_key = True)
+    id_produto = db.Column(db.Integer, db.ForeignKey("produto.id"))
     produto = db.relationship("Produto", foreign_keys = id_produto)
 
 
