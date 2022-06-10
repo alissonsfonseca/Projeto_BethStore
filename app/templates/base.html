@@ -26,11 +26,11 @@
                 <form method="POST" action="{{ url_for('controllers.busca')}}" class="container" >
                     <div class="input-group" style="width: 80%;" >
                         <span class="input-group-text" id="basic-addon1">
-                            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                            <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="categoria">
                                 
-                                <option selected>Selecionar Categoria</option>
+                                <option selected value="0">Selecionar Categoria</option>
                                 {% for cat in categorias%}
-                                <option value="{{cat.nome}}">{{cat.nome}}</option>
+                                <option value="{{cat.id}}">{{cat.nome}}</option>
                                 {% endfor %}
                             </select>
                         </span>

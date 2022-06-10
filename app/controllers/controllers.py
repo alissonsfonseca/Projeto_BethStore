@@ -9,18 +9,43 @@ controllers = Blueprint('controllers', __name__)
 def index():
     produtos = Produto.query.all()
     categorias = Categoria.query.all()
-
+    
     return render_template('index.html', usuario=current_user, produtos=produtos, categorias=categorias)
 
 @controllers.route('/busca', methods = ['POST'])
 def busca():
+    categorias = Categoria.query.all()
     busca = request.form.get('busca')
-    if busca:
-        produtos = Produto.query.filter(Produto.marca.contains(busca) | Produto.modelo.contains(busca))
-        quant = 0
-        for produto in produtos:
-            quant = quant + 1
-    return render_template('busca.html', usuario=current_user, produtos=produtos, quant=quant, busca=busca)
+    busca = busca.upper()
+    categoria = request.form.get("categoria")
+    produtos_categoria = db.session.query(Produto).join(Produto.categoria)
+    produtos = []
+    if busca and categoria == "0":
+        for prod in produtos_categoria:
+            modelo = str(prod.modelo).upper()
+            marca = str(prod.marca).upper()
+            categoria = str(prod.categoria.nome).upper()
+            if busca in modelo or busca in categoria or busca in marca:
+                produtos.append(prod)
+    elif not busca and categoria != "0":
+        for prod in produtos_categoria:
+            if int(categoria) == prod.categoria.id:
+                produtos.append(prod)
+        categoria = Categoria.query.filter_by(id=categoria).first()
+        busca = categoria.nome
+    elif busca and categoria != "0":
+        for prod in produtos_categoria:
+            modelo = str(prod.modelo).upper()
+            marca = str(prod.marca).upper()
+            if int(categoria) == prod.categoria.id and ((busca in modelo) or (busca in categoria) or (busca in marca)):
+                produtos.append(prod)
+        categoria = Categoria.query.filter_by(id=categoria).first()
+        busca = busca + " em "+ categoria.nome
+    else:
+        for prod in produtos_categoria:
+            produtos.append(prod)
+        busca = "todos"
+    return render_template('busca.html', usuario=current_user, produtos=produtos, quant = len(produtos), busca = busca, categorias = categorias)
 
 @controllers.route('/dashboard-usuario')
 def dash_usuario():

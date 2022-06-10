@@ -18,7 +18,10 @@ def login():
         if usuario:
             if check_password_hash(usuario.senha, senha):
                 login_user(usuario, remember=True)
-                return redirect(url_for('controllers.index'))
+                if usuario.admin == 0:
+                    return redirect(url_for('controllers.index'))
+                else:
+                    return redirect(url_for('controllers.dash_usuario'))
             else:
                 return 'senha incorreta'
         else:

@@ -46,16 +46,23 @@ class Categoria(db.Model):
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     descricao = db.Column(db.String)
     nome = db.Column(db.String)
-    setor = db.Column(db.String)
+    
+    id_setor = db.Column(db.Integer, db.ForeignKey("setor.id"))
+    setor = db.relationship("Setor", foreign_keys = id_setor)
+    
+class Setor(db.Model):
+    id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    nome = db.Column(db.String)
 
 class Carrinho(db.Model):
+    id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     quantidade = db.Column(db.Integer)
     valor_frete = db.Column(db.Float)
     previsao_entrega = db.Column(db.Integer)
     
-    id_cliente = db.Column(db.Integer, db.ForeignKey("cliente.id"), primary_key = True)
+    id_cliente = db.Column(db.Integer, db.ForeignKey("cliente.id"))
     cliente = db.relationship("Cliente", foreign_keys = id_cliente)
-    id_produto = db.Column(db.Integer, db.ForeignKey("produto.id"), primary_key = True)
+    id_produto = db.Column(db.Integer, db.ForeignKey("produto.id"))
     produto = db.relationship("Produto", foreign_keys = id_produto)
 
 class Pedido(db.Model):

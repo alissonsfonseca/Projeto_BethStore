@@ -16,11 +16,13 @@ from app.controllers.controllers import controllers
 from app.controllers.autentificador import autentificador
 from app.controllers.produtoController import produtoController
 from app.controllers.categoriaController import categoriaController
+from app.controllers.carrinhoController import carrinhoController
 
 app.register_blueprint(controllers, url_prefix='/')
 app.register_blueprint(autentificador, url_prefix='/')
 app.register_blueprint(produtoController, url_prefix='/')
 app.register_blueprint(categoriaController, url_prefix='/')
+app.register_blueprint(carrinhoController, url_prefix='/')
 
 from app.models import tables
 from app.models.tables import Usuario

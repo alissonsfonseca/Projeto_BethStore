@@ -26,8 +26,10 @@ def cadastroProduto():
             tamanho = request.form.get('tamanho')
             quantidade = int(request.form.get('quantidade'))
             categoria = int(request.form.get('categoria'))
+            descricao = request.form.get('descricao')
+            inf_tecnica = request.form.get('inf_tecnica')
 
-            novo_produto = Produto(id_categoria=categoria, marca=marca, modelo=modelo,preco=preco, tamanho=tamanho, quantidade=quantidade, id_imagem=imagem.id)
+            novo_produto = Produto(descricao=descricao, inf_tecnica=inf_tecnica, id_categoria=categoria, marca=marca, modelo=modelo,preco=preco, tamanho=tamanho, quantidade=quantidade, id_imagem=imagem.id)
             db.session.add(novo_produto)
             db.session.commit()
             
@@ -45,3 +47,8 @@ def paginaProduto(id):
 def get_imagem(id):
     imagem = Imagem.query.filter_by(id=id).first()
     return Response(imagem.img, mimetype=imagem.mimetype)
+
+@produtoController.route('/produtos/catalogo', methods=['GET','POST'])
+def catalogoProduto():
+    produtos = Produto.query.all()
+    return render_template('catalogoProduto.html', usuario=current_user, produtos=produtos)

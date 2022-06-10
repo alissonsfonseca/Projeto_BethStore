@@ -17,13 +17,10 @@
             <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
                 <label class="form-label" for="image">Setor</label>
                 <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="setor">
-                    <option selected>Todos</option>
-                    <option value="1">Vestuários</option>
-                    <option value="2">Decoração</option>
-                    <option value="3">Beleza</option>
-                    <option value="3">Cama</option>
-                    <option value="3">Mesa</option>
-                    <option value="3">Banho</option>
+                    <option selected>Selecione</option>
+                    {% for setor in setores %}
+                    <option value="{{setor.id}}">{{setor.nome}}</option>
+                    {% endfor %}
                 </select>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">

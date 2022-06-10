@@ -8,11 +8,28 @@
       <img src="{{ url_for('produtoController.get_imagem', id=produto.id_imagem) }}" class="card-img-top" alt="...">
     </div>
     <div class="card-body">
-      <h5 class="card-title">{{produto.modelo}}</h5>
+      <p class="card-text">Código do Produto: {{produto.id}}</p>
+      <img src = "{{ url_for('produtoController.get_imagem', id=produto.id_imagem) }}" style="width: 300px;">
       <p class="card-text">Preço: {{produto.preco}}</p>
       <p class="card-text">Marca: {{produto.marca}}</p>
       <p class="card-text">Tamanho: {{produto.tamanho}}</p>
-      <a href="#" class="btn btn-primary">Adicionar ao carrinho</a>
+      <p class="card-text">Descrição: {{produto.descricao}}</p>
+      <p class="card-text">Informações Técnicas: {{produto.inf_tecnica}}</p>
+      <form method="POST">
+        <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
+          <label class="form-label" for="quantidade">Quantidade</label>
+          <input type="number"
+                  required
+                  class="form-control"
+                  name="quantidade" 
+                  id="quantidade" 
+                  placeholder="10">
+        </div>
+      
+     
+      <br>
+      <a href="{{ url_for('carrinhoController.produtoCarrinho', id=produto.id)}}" class="btn btn-primary" type="submit">Adicionar ao carrinho</a>
+    </form>
     </div>
   </div>
 </div>
