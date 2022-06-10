@@ -48,7 +48,19 @@ def busca():
     return render_template('busca.html', usuario=current_user, produtos=produtos, quant = len(produtos), busca = busca, categorias = categorias)
 
 @controllers.route('/dashboard-usuario')
+@login_required
 def dash_usuario():
-    lista_usuario = Usuario.query.all()
-    return render_template('dash-user.html', usuario=current_user, lista_usuario = lista_usuario)
+    if current_user.admin == True:
+        lista_usuario = Usuario.query.all()
+        return render_template('dash-user.html', usuario=current_user, lista_usuario = lista_usuario)
+    else:
+        return 'acesso negado', 400
+
+@controllers.route('/administrador')
+@login_required
+def administrador():
+    if current_user.admin == True:
+        return render_template('administrador.html', usuario=current_user)
+    else:
+        return 'Acesso negado', 400
     
