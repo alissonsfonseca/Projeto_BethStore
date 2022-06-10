@@ -3,6 +3,7 @@ from flask import Blueprint, Response , render_template, redirect, url_for, requ
 from flask_login import login_user, login_required, logout_user, current_user
 from app import db 
 from werkzeug.utils import secure_filename
+from app.controllers.carrinhoController import carrinho
 from app.models.tables import Produto, Categoria, Imagem
 
 produtoController = Blueprint('produtoController', __name__)
@@ -41,7 +42,12 @@ def cadastroProduto():
 @produtoController.route('/produtos/<int:id>', methods=['GET','POST'])
 def paginaProduto(id):
     produto = Produto.query.get_or_404(id)
-    return render_template('produto.html', usuario=current_user, produto=produto)
+    if request.method == "GET":
+        quant = 0
+        return render_template('produto.html', usuario=current_user, produto=produto, quant=quant)
+    else:
+        quant = request.form.get("quantidade")
+        return redirect(url_for('carrinhoController.produtoCarrinho', id=produto.id, quant=quant))
 
 @produtoController.route('/produtos/imagem/<int:id>', methods=['GET', 'POST'])
 def get_imagem(id):
@@ -52,3 +58,9 @@ def get_imagem(id):
 def catalogoProduto():
     produtos = Produto.query.all()
     return render_template('catalogoProduto.html', usuario=current_user, produtos=produtos)
+
+@produtoController.route('/produtos/adicionar', methods=['GET','POST'])
+def adicionarProdutoCarrinho():
+    id_produto = 2
+    quant = 2
+    return url_for("carrinhoController.produtoCarrinho", id = id_produto, quant = quant)

@@ -13,16 +13,18 @@ def carrinho():
     id = cliente.id
     carrinho = Carrinho.query.filter_by(id_cliente=id)
     return render_template("carrinho.html", usuario = current_user, carrinho=carrinho)
+        
 
-@carrinhoController.route("/carrinho/produto/<int:id>", methods=["GET", "POST"])
+@carrinhoController.route("/carrinho/produto/<int:id>/<int:quant>", methods=["GET", "POST"])
 @login_required
-def produtoCarrinho(id):
+def produtoCarrinho(id, quant):
     cliente = Cliente.query.filter_by(id_usuario=current_user.id).first()
     id_cliente = cliente.id
     id_produto = id
     valor_frete = 10.0
     previsao_entrega = 3
-    carrinho = Carrinho(id_cliente=id_cliente, id_produto=id_produto, valor_frete=valor_frete, previsao_entrega=previsao_entrega)
+    quantidade = quant
+    carrinho = Carrinho(id_cliente=id_cliente, id_produto=id_produto, valor_frete=valor_frete, previsao_entrega=previsao_entrega, quantidade = quantidade)
     db.session.add(carrinho)
     db.session.commit()
-    return redirect("/carrinho")
+    return redirect(url_for("carrinhoController.carrinho"))

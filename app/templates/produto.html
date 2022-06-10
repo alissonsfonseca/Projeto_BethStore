@@ -60,9 +60,19 @@
               <p class="card-text">{{produto.descricao}}</p>
               <p class="card-text"><small class="text-muted">{{produto.inf_tecnica}}</small></p>
             <div class="mt-4">
-              <a href="{{ url_for('carrinhoController.produtoCarrinho', id=produto.id)}}">
-                <button type="button" class="btn btn-success">Adicionar ao Carrinho</button>
+              <form  method="POST">
+                <div>
+                  <input type="number"
+                          required
+                          name="quantidade" 
+                          id="quantidade" 
+                          placeholder="quantidade">
+              </div>
+              
+              <a>
+                <button type="submit" class="btn btn-success">Adicionar ao Carrinho</button>
               </a>
+            </form>
             </div>
           </div>
         </div>

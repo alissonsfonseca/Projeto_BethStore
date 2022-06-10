@@ -23,15 +23,7 @@
           <td>{{items.cliente.nome}}</td>
           <th>{{items.produto.preco}}</th>
           <th>
-            <form  method="POST">
-              <div>
-                <input type="number"
-                        required
-                        name="{{items.produto.id}}" 
-                        id="quantidade" 
-                        placeholder="quantidade">
-            </div>
-            </form>
+            {{items.quantidade}}
           </th>
         </tr>
         {% endfor%}
