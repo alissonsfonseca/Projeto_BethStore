@@ -46,6 +46,28 @@ def cadastro():
         endereco = request.form.get('endereco')
         telefone = request.form.get('telefone')
         cep = request.form.get('cep')
+        
+        multiplicador = 10
+        soma = 0
+        cpf_valido = False
+        contador = 1
+        for item in cpf:
+            if contador <= 9:
+                soma = soma + (int(item) * multiplicador)
+                multiplicador = multiplicador - 1
+                contador = contador + 1
+        primeiro_digito = ((soma * 10) % 11)
+        multiplicador = 11
+        soma = 0
+        contador = 1
+        for item in cpf:
+            if contador <= 10:
+                soma = soma + (int(item) * multiplicador)
+                multiplicador = multiplicador - 1
+                contador = contador + 1
+        segundo_digito = ((soma * 10) % 11)
+        if int(cpf[9]) == primeiro_digito and int(cpf[10]) == segundo_digito:
+            cpf_valido = True
 
         usuario = Usuario.query.filter_by(email=email).first()
         if usuario:
@@ -58,14 +80,16 @@ def cadastro():
             return 'senha curta'
         elif len(nome) < 4:
             return 'nome curto'
-        elif len(cpf) < 8:
-            return 'cpf curto'
+        elif not cpf_valido:
+            return 'cpf invalido'
         elif len(endereco) < 4:
             return 'endereço curto'
         elif len(telefone) < 4:
             return 'telefone curto'
-        elif len(cep) < 4:
+        elif len(cep) < 8:
             return 'cep curto'
+        elif len(cep) > 8:
+            return 'cep longo'
         else:
             novo_usuario = Usuario(email=email, admin=False, senha=generate_password_hash(password1, method='sha256'))
             db.session.add(novo_usuario)
