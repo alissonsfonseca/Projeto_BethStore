@@ -86,6 +86,7 @@ class Aprovacao(db.Model):
     usuario = db.relationship("Usuario", foreign_keys = id_usuario)
 
 class ProdutoPedido(db.Model):
+    id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     quantidade = db.Column(db.Integer)
     valor = db.Column(db.Float)
     

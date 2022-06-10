@@ -17,10 +17,10 @@
         </tr>
       </thead>
       <tbody>
-        {% for items in carrinho %}
+        {% for items in produto_pedido %}
         <tr>
-          <th >{{items.produto.modelo}}</th>
-          <td>{{items.cliente.nome}}</td>
+          <th >{{items.nome}}</th>
+          <td>{{items.pedido.cliente.nome}}</td>
           <th>{{items.produto.preco}}</th>
           <th>
             {{items.quantidade}}
@@ -32,23 +32,11 @@
   <div class="card-footer ">
     CEP: <strong>{{cliente.cep}}</strong>
     <div>
-      Frete: <strong>{{frete}}</strong>
+      Frete: <strong>10</strong>
     </div>
     <div>
       Valor total: <strong>{{total}}</strong>
     </div>
-    <form action="/carrinho/finalizar" method="POST">
-      <div class="mt-2">
-        <select name="pagamento" style="width: 200px;">              
-          <option selected value="0">Forma de pagamento</option>
-          <option value="boleto">Boleto</option>
-          <option value="pix">Pix</option>
-          <option value="catao">Cartão</option>
-      </select>
-      </div>
-      
-      <button type="submit" class="btn btn-success mt-2">Finalizar Pedido</button>
-    </form>
   </div>
 </div>
 
