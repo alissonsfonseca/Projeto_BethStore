@@ -21,7 +21,7 @@ def login():
                 if usuario.admin == 0:
                     return redirect(url_for('controllers.index'))
                 else:
-                    return redirect(url_for('controllers.dash_usuario'))
+                    return redirect(url_for('controllers.administrador'))
             else:
                 return 'senha incorreta'
         else:
