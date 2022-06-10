@@ -1,6 +1,6 @@
 from flask import Blueprint , render_template, redirect, url_for, request
 from flask_login import login_required, current_user
-from app.models.tables import Imagem, Pedido, Usuario, Produto, Categoria
+from app.models.tables import Imagem, Pedido, Usuario, Produto, Categoria, Aprovacao
 from app import db
 
 controllers = Blueprint('controllers', __name__)
@@ -73,3 +73,13 @@ def aprovacao():
     else:
         return 'Acesso negado', 400
     
+@controllers.route('/aprovacao/cadastro', methods=['GET','POST'])
+@login_required
+def cadastrarAprovacao():
+    if current_user.admin == True:
+        if request.method == 'POST':
+            mensagem = request.form.get('mensagem')
+            novo_status = Aprovacao(mensagem=mensagem, id_usuario=current_user.id)
+        return render_template('cadastroAprovacao.html', usuario=current_user)
+    else:
+        return 'Acesso negado', 400
