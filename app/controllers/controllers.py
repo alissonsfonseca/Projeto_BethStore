@@ -1,6 +1,6 @@
 from flask import Blueprint , render_template, redirect, url_for, request
 from flask_login import login_required, current_user
-from app.models.tables import Imagem, Usuario, Produto, Categoria
+from app.models.tables import Imagem, Pedido, Usuario, Produto, Categoria
 from app import db
 
 controllers = Blueprint('controllers', __name__)
@@ -61,6 +61,15 @@ def dash_usuario():
 def administrador():
     if current_user.admin == True:
         return render_template('administrador.html', usuario=current_user)
+    else:
+        return 'Acesso negado', 400
+
+@controllers.route('/aprovacao', methods=['GET','POST'])
+@login_required
+def aprovacao():
+    if current_user.admin == True:
+        pedidos = Pedido.query.all()
+        return render_template('aprovacao.html', usuario=current_user, pedidos=pedidos)
     else:
         return 'Acesso negado', 400
     
