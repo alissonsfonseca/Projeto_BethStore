@@ -13,7 +13,12 @@ def carrinho():
     cliente = Cliente.query.filter_by(id_usuario=current_user.id).first()
     id = cliente.id
     carrinho = Carrinho.query.filter_by(id_cliente=id)
-    return render_template("carrinho.html", usuario = current_user, carrinho=carrinho, categorias=categorias)
+    item = Carrinho.query.filter_by(id_cliente=id).first()
+    valor = item.valor_frete
+    total = 0
+    for items in carrinho:
+        total = total + items.produto.preco
+    return render_template("carrinho.html", usuario = current_user, carrinho=carrinho, categorias=categorias, frete = valor, total = total)
         
 
 @carrinhoController.route("/carrinho/produto/<int:id>/<int:quant>", methods=["GET", "POST"])
