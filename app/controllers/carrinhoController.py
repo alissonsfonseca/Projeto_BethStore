@@ -59,7 +59,7 @@ def finalizarCarrinho():
 
         for produtos in carrinho:
             produto = Produto.query.filter_by(id=produtos.id_produto).first()
-            novo_produtopedido = ProdutoPedido(quantidade=produtos.quantidade, valor=produto.preco, id_produto = produtos.id, id_pedido=novo_pedido.id )
+            novo_produtopedido = ProdutoPedido(quantidade=produtos.quantidade, valor=produto.preco, id_produto = produtos.id, id_pedido=novo_pedido.id)
             db.session.add(novo_produtopedido)
             db.session.commit()
             db.session.delete(produtos)
@@ -73,10 +73,7 @@ def finalizarCarrinho():
 @login_required
 def pedidos():
     cliente = Cliente.query.filter_by(id_usuario=current_user.id).first()
-    pedido = Pedido.query.filter_by(id_cliente=cliente.id)
-    produto_pedido = ProdutoPedido.query.filter_by(id_pedido=pedido.id)
-    total = 0
-    for items in produto_pedido:
-        total = total + (items.valor * items.quantidade)
-
-    return render_template("pedidos.html", usuario=current_user, produto_pedido=produto_pedido, total = total)
+    pedidos = Pedido.query.filter_by(id_cliente=cliente.id)
+    
+    
+    return render_template("listaPedidos.html", usuario=current_user, pedidos = pedidos)
