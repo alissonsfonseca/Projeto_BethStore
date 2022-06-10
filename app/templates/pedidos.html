@@ -19,7 +19,7 @@
       <tbody>
         {% for items in produto_pedido %}
         <tr>
-          <th >{{items.nome}}</th>
+          <th>{{items.produto.modelo}}</th>
           <td>{{items.pedido.cliente.nome}}</td>
           <th>{{items.produto.preco}}</th>
           <th>
