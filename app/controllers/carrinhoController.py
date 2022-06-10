@@ -17,7 +17,7 @@ def carrinho():
     valor = item.valor_frete
     total = 0
     for items in carrinho:
-        total = total + items.produto.preco
+        total = total + (items.produto.preco * items.quantidade)
     return render_template("carrinho.html", usuario = current_user, carrinho=carrinho, categorias=categorias, frete = valor, total = total, cliente=cliente)
         
 
