@@ -66,7 +66,7 @@ def finalizarCarrinho():
             db.session.commit()
         pedido = Pedido.query.filter_by(id=novo_pedido.id).first()
         produto_pedido = ProdutoPedido.query.filter_by(id_pedido=pedido.id)
-    return redirect(url_for('pedidos'))
+    return render_template("pedidos.html", usuario=current_user, produto_pedido=produto_pedido, total = total, valor=valor, cliente=cliente )
 
 
 @carrinhoController.route("/pedidos", methods=['GET','POST'])
