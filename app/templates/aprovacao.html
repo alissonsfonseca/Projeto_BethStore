@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 align="center">Aprovação</h2>
+{% for pedido in pedidos %}
+        <div class="card text-center " style="margin-left: 20px; margin-right: 20px; margin-bottom: 10px;">
+            <div class="card-header">
+            Pedido {{pedido.id}}
+            </div>
+    
+            <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Número Pedido</th>
+                    <th scope="col">Cod. Aprovação</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Quantidade</th>
+                    <th scope="col">Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                
+                    <tr>
+                        <th>{{pedido.id}}</th>
+                        <td>{{pedido.aprovacao.mensagem}}</td>
+                        <th>{{pedido.aprovacao.status}}</th>
+                        <th>
+                        {{pedido.quantidade}}
+                        </th>
+                        <th><button type="button" class="btn btn-primary btn-sm">Aprovar</button>
+                            <button type="button" class="btn btn-primary btn-sm">Recusar</button>
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="card-footer ">
+            CEP: <strong>{{pedido.cliente.cep}}</strong>
+            <div>
+                Frete: <strong>10</strong>
+            </div>
+            </div>
+        </div>
+    
+        </div>
+        {% endfor %}
+{% endblock content %}
