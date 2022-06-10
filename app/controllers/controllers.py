@@ -87,3 +87,12 @@ def cadastrarAprovacao():
         return render_template('cadastroAprovacao.html', usuario=current_user)
     else:
         return 'Acesso negado', 400
+    
+@controllers.route('/aprovacao/<int:id>', methods=['GET','POST'])
+@login_required
+def aprovacaoPedido(id):
+    pedido = Pedido.query.filter_by(id=id).first()
+    aprovacao = int(request.form.get("aprovacao"))
+    pedido.id_aprovacao = aprovacao
+    db.session.commit()
+    return redirect(url_for("controllers.aprovacao"))

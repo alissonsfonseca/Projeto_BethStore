@@ -14,8 +14,8 @@
                 <tr>
                     <th scope="col">Número Pedido</th>
                     <th scope="col">Aprovação</th>
+                    <th scope="col">Ação</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Ações</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -23,16 +23,19 @@
                     <tr>
                         <th>{{pedido.id}}</th>
                         <td>
-                            <select>
-                            <option selected value="0">Selecione</option>
+                            <form action="/aprovacao/{{pedido.id}}" method="POST">
+                            <select class="form-select form-select-sm" name="aprovacao" id="aprovacao" aria-label=".form-select-sm example">
+                            <option selected>Selecione</option>
                                 {% for aprovacao in aprovacoes%}
                                 <option value="{{aprovacao.id}}">{{aprovacao.mensagem}}</option>
                                 {% endfor %}
                             </select>
+                            <td>
+                            <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+                            </td>
+                        </form>
                         </td>
                         <th>{{pedido.aprovacao.mensagem}}</th>
-                        <th><button type="button" class="btn btn-primary btn-sm">Salvar</button>
-                        </th>
                     </tr>
                     <tr>
                         
