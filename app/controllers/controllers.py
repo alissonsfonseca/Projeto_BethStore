@@ -80,6 +80,8 @@ def cadastrarAprovacao():
         if request.method == 'POST':
             mensagem = request.form.get('mensagem')
             novo_status = Aprovacao(mensagem=mensagem, id_usuario=current_user.id)
+            db.session.add(novo_status)
+            db.session.commit()
         return render_template('cadastroAprovacao.html', usuario=current_user)
     else:
         return 'Acesso negado', 400
