@@ -38,7 +38,16 @@
       Valor total: <strong>{{total}}</strong>
     </div>
     <form action="" method="post">
-      <button type="submit" class="btn btn-success">Finalizar Pedido</button>
+      <div class="mt-2">
+        <select name="pagamento" style="width: 200px;">              
+          <option selected value="0">Forma de pagamento</option>
+          <option value="boleto">Boleto</option>
+          <option value="pix">Pix</option>
+          <option value="catao">Cartão</option>
+      </select>
+      </div>
+      
+      <button type="submit" class="btn btn-success mt-2">Finalizar Pedido</button>
     </form>
   </div>
 </div>
