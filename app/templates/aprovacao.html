@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-        <div class="card text-center " style="margin-left: 20px; margin-right: 20px">
+<h2 align="center">Aprovação</h2>
+{% for pedido in pedidos %}
+        <div class="card text-center " style="margin-left: 20px; margin-right: 20px; margin-bottom: 10px;">
             <div class="card-header">
-            Aprovação
+            Pedido {{pedido.id}}
             </div>
-    {% for pedido in pedidos p%}
+    
             <div class="card-body">
             <table class="table">
                 <thead>
@@ -18,7 +20,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for items in produto_pedido %}
+                
                     <tr>
                         <th>{{pedido.id}}</th>
                         <td>{{pedido.aprovacao.mensagem}}</td>
@@ -30,7 +32,6 @@
                             <button type="button" class="btn btn-primary btn-sm">Recusar</button>
                         </th>
                     </tr>
-                {% endfor%}
                 </tbody>
             </table>
             <div class="card-footer ">
@@ -40,6 +41,7 @@
             </div>
             </div>
         </div>
-    {% endfor %}
+    
         </div>
+        {% endfor %}
 {% endblock content %}
