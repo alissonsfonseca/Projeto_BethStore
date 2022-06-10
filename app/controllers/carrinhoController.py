@@ -51,7 +51,7 @@ def finalizarCarrinho():
             total = total + (items.produto.preco * items.quantidade)
         valor = 10
 
-        novo_pedido = Pedido(valor_frete=10, previsao_entrega=0, forma_pagamento=pagamento,pagamento=0,total=total, id_cliente=cliente.id)
+        novo_pedido = Pedido(valor_frete=10, previsao_entrega=0, forma_pagamento=pagamento, pagamento=0 ,total=total, id_cliente=cliente.id, id_aprovacao = 3)
         db.session.add(novo_pedido)
         db.session.commit()
 

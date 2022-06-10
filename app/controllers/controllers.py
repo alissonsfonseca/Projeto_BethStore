@@ -1,6 +1,6 @@
 from flask import Blueprint , render_template, redirect, url_for, request
 from flask_login import login_required, current_user
-from app.models.tables import Imagem, Pedido, Usuario, Produto, Categoria, Aprovacao
+from app.models.tables import Imagem, Pedido, ProdutoPedido, Usuario, Produto, Categoria, Aprovacao
 from app import db
 
 controllers = Blueprint('controllers', __name__)
@@ -69,7 +69,9 @@ def administrador():
 def aprovacao():
     if current_user.admin == True:
         pedidos = Pedido.query.all()
-        return render_template('aprovacao.html', usuario=current_user, pedidos=pedidos)
+        produtos_pedidos = ProdutoPedido.query.all()
+        aprovacoes = Aprovacao.query.all()
+        return render_template('aprovacao.html', usuario=current_user, pedidos=pedidos, produtos_pedidos = produtos_pedidos, aprovacoes = aprovacoes)
     else:
         return 'Acesso negado', 400
     

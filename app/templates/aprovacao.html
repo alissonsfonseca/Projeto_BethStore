@@ -13,9 +13,8 @@
                 <thead>
                 <tr>
                     <th scope="col">Número Pedido</th>
-                    <th scope="col">Cod. Aprovação</th>
+                    <th scope="col">Aprovação</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Quantidade</th>
                     <th scope="col">Ações</th>
                 </tr>
                 </thead>
@@ -23,25 +22,64 @@
                 
                     <tr>
                         <th>{{pedido.id}}</th>
-                        <td>{{pedido.aprovacao.mensagem}}</td>
-                        <th>{{pedido.aprovacao.status}}</th>
-                        <th>
-                        {{pedido.quantidade}}
-                        </th>
-                        <th><button type="button" class="btn btn-primary btn-sm">Aprovar</button>
-                            <button type="button" class="btn btn-primary btn-sm">Recusar</button>
+                        <td>
+                            <select>
+                            <option selected value="0">Selecione</option>
+                                {% for aprovacao in aprovacoes%}
+                                <option value="{{aprovacao.id}}">{{aprovacao.mensagem}}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <th>{{pedido.aprovacao.mensagem}}</th>
+                        <th><button type="button" class="btn btn-primary btn-sm">Salvar</button>
                         </th>
                     </tr>
+                    <tr>
+                        
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Produto</th>
+                    <th scope="col">Modelo</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Quantidade</th>
+                    <th scope="col">Vl. Unit.</th>
+                </tr>
+                </thead>
+                {% for produto in produtos_pedidos %}
+                <tbody>
+                    
+                    <tr>
+                        {% if pedido.id == produto.pedido.id %}
+                        <th>{{produto.id_produto}}</th>
+                        <td>{{produto.produto.modelo}}</td>
+                        <td>{{produto.produto.marca}}</td>
+                        <td>{{produto.quantidade}}</td>
+                        <td>{{produto.valor}}</td>
+                        {% endif %}
+                    </tr>
                 </tbody>
+                {% endfor %}
             </table>
+                    
+                    </tr>
+                   
+                </tbody>
+                
+            </table>
+            
             <div class="card-footer ">
             CEP: <strong>{{pedido.cliente.cep}}</strong>
             <div>
                 Frete: <strong>10</strong>
             </div>
+            <div>
+                Total: <strong>{{pedido.total}}</strong>
+            </div>
             </div>
         </div>
     
         </div>
+        <br><br>
         {% endfor %}
 {% endblock content %}
