@@ -1,7 +1,7 @@
 from app import db
 from flask import Blueprint, redirect, render_template, request, session, url_for
 from flask_login import login_required, current_user
-from app.models.tables import Carrinho, Cliente, Produto, Usuario
+from app.models.tables import Carrinho, Categoria, Cliente, Produto, Usuario
 
 
 carrinhoController = Blueprint('carrinhoController', __name__)
@@ -9,10 +9,11 @@ carrinhoController = Blueprint('carrinhoController', __name__)
 @carrinhoController.route("/carrinho", methods=["GET", "POST"])
 @login_required
 def carrinho():
+    categorias = Categoria.query.all()
     cliente = Cliente.query.filter_by(id_usuario=current_user.id).first()
     id = cliente.id
     carrinho = Carrinho.query.filter_by(id_cliente=id)
-    return render_template("carrinho.html", usuario = current_user, carrinho=carrinho)
+    return render_template("carrinho.html", usuario = current_user, carrinho=carrinho, categorias=categorias)
         
 
 @carrinhoController.route("/carrinho/produto/<int:id>/<int:quant>", methods=["GET", "POST"])

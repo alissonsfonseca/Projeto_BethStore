@@ -41,10 +41,11 @@ def cadastroProduto():
 
 @produtoController.route('/produtos/<int:id>', methods=['GET','POST'])
 def paginaProduto(id):
+    categorias = Categoria.query.all()
     produto = Produto.query.get_or_404(id)
     if request.method == "GET":
         quant = 0
-        return render_template('produto.html', usuario=current_user, produto=produto, quant=quant)
+        return render_template('produto.html', usuario=current_user, produto=produto, quant=quant, categorias = categorias)
     else:
         quant = request.form.get("quantidade")
         return redirect(url_for('carrinhoController.produtoCarrinho', id=produto.id, quant=quant))
