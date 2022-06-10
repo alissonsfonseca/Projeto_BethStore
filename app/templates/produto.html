@@ -59,20 +59,21 @@
               <p><strong>Descrição</strong></p>
               <p class="card-text">{{produto.descricao}}</p>
               <p class="card-text"><small class="text-muted">{{produto.inf_tecnica}}</small></p>
-            <div class="mt-4">
+            <div class="mt-4 mb-3">
               <form  method="POST">
                 <div>
                   <input type="number"
                           required
                           name="quantidade" 
                           id="quantidade" 
-                          placeholder="quantidade">
-              </div>
-              
-              <a>
-                <button type="submit" class="btn btn-success">Adicionar ao Carrinho</button>
-              </a>
-            </form>
+                          placeholder="Quantidade">
+                </div>
+                <div class="mt-2">
+                  <a>
+                    <button type="submit" class="btn btn-success">Adicionar ao Carrinho</button>
+                  </a>
+                </div>
+              </form>
             </div>
           </div>
         </div>
