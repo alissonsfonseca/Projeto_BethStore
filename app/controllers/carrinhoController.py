@@ -66,4 +66,17 @@ def finalizarCarrinho():
             db.session.commit()
         pedido = Pedido.query.filter_by(id=novo_pedido.id).first()
         produto_pedido = ProdutoPedido.query.filter_by(id_pedido=pedido.id)
-    return render_template("pedidos.html", usuario=current_user, produto_pedido=produto_pedido, total = total, valor=valor, cliente=cliente )
+    return redirect(url_for('pedidos'))
+
+
+@carrinhoController.route("/pedidos", methods=['GET','POST'])
+@login_required
+def pedidos():
+    cliente = Cliente.query.filter_by(id_usuario=current_user.id).first()
+    pedido = Pedido.query.filter_by(id_cliente=cliente.id)
+    produto_pedido = ProdutoPedido.query.filter_by(id_pedido=pedido.id)
+    total = 0
+    for items in produto_pedido:
+        total = total + (items.valor * items.quantidade)
+
+    return render_template("pedidos.html", usuario=current_user, produto_pedido=produto_pedido, total = total)
